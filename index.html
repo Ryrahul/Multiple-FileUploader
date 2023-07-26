@@ -56,6 +56,7 @@
 
             const myFiles=document.getElementById('myFiles').files
             const formData=new FormData()
+            console.log(myFiles)
             Object.keys(myFiles).forEach((key)=>{
                 formData.append(myFiles.item(key).name,myFiles.item(key))
             })
@@ -66,7 +67,7 @@
             const json=await respose.json()
             document.getElementById('status').textContent = `Status: ${json?.status}`;
             document.getElementById('message').textContent = `Message: ${json?.message}`;
-            console.log(json)
+            // console.log(json)
         }
         form.addEventListener('submit',(e)=>{
             e.preventDefault()
