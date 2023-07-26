@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJs File Uploader</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+    
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+    
+        input[type="file"] {
+            margin-bottom: 10px;
+        }
+    
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    
+        h2,
+        h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>NodeJs File Uploader</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="myFiles" accept="image/*"multiple >
+    <button>Submit</button>
+    </form>
+<h2 id="status"></h2>
+<h3 id="message"></h3>
+    <script>
+        const form=document.getElementById('uploadForm')
+        const sendfiles=async()=>{
+
+            const myFiles=document.getElementById('myFiles').files
+            const formData=new FormData()
+            Object.keys(myFiles).forEach((key)=>{
+                formData.append(myFiles.item(key).name,myFiles.item(key))
+            })
+            const respose=await fetch('http://localhost:8080/upload',{
+                method:'POST',
+                body:formData
+            })
+            const json=await respose.json()
+            document.getElementById('status').textContent = `Status: ${json?.status}`;
+            document.getElementById('message').textContent = `Message: ${json?.message}`;
+            console.log(json)
+        }
+        form.addEventListener('submit',(e)=>{
+            e.preventDefault()
+            sendfiles()
+        })
+    </script>
+    
+    
+</body>
+</html>
