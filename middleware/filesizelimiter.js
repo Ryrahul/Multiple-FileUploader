@@ -4,13 +4,13 @@ const FILE_SIZE_LIMIT = 5 * 1024 * 1024;
 const filesizelimiter = (req, res, next) => {
   const files = req.files;
   const fileOverlimit = [];
-  
+
   Object.keys(files).forEach((key) => {
     if (files[key].size > FILE_SIZE_LIMIT) {
       fileOverlimit.push(files[key].name);
     }
   });
-  if(fileOverlimit.length){
+  if (fileOverlimit.length) {
     const properVerb = filesOverLimit.length > 1 ? "are" : "is";
 
     const sentence =
@@ -25,8 +25,7 @@ const filesizelimiter = (req, res, next) => {
         : sentence.replace(/,(?=[^,]*$)/, " and");
 
     return res.status(413).json({ status: "error", message });
-
   }
-  next()
+  next();
 };
-module.exports=filesizelimiter
+module.exports = filesizelimiter;
