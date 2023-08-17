@@ -17,11 +17,12 @@ app.post(
   [fileExist, filesizelimiter, fileExtlimiter([".png", ".jpg", ".jpeg"])],
   (req, res) => {
     const files = req.files;
+    console.log(files);
 
     Object.keys(files).forEach((key) => {
       const filepath = path.join(__dirname, "files", files[key].name);
       files[key].mv(filepath, (err) => {
-        return res.json({
+        return res.status(200).json({
           status: "error",
           message: "Not proper filepath or filename",
         });
