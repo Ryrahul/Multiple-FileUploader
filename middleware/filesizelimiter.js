@@ -11,16 +11,16 @@ const filesizelimiter = (req, res, next) => {
     }
   });
   if (fileOverlimit.length) {
-    const properVerb = fileOverLimit.length > 1 ? "are" : "is";
+    const properVerb = fileOverlimit.length > 1 ? "are" : "is";
 
     const sentence =
-      `Upload failed. ${filesOverLimit.toString()} ${properVerb} over the file size limit of ${MB} MB.`.replaceAll(
+      `Upload failed. ${filesOverlimit.toString()} ${properVerb} over the file size limit of ${MB} MB.`.replaceAll(
         ",",
         ", "
       );
 
     const message =
-      filesOverLimit.length < 3
+      filesOverlimit.length < 3
         ? sentence.replace(",", " and")
         : sentence.replace(/,(?=[^,]*$)/, " and");
 
