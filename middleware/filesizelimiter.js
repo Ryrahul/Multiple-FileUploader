@@ -1,7 +1,7 @@
 const MB = 5;
-const FILE_SIZE_LIMIT = 5 * 1024 * 1024;
+const FILE_SIZE_LIMIT = MB * 1024 * 1024;
 
-const filesizelimiter = (req, res, next) => {
+export const filesizelimiter = (req, res, next) => {
   const files = req.files;
   const fileOverlimit = [];
 
@@ -20,7 +20,7 @@ const filesizelimiter = (req, res, next) => {
       );
 
     const message =
-      filesOverlimit.length < 3
+      fileOverlimit.length < 3
         ? sentence.replace(",", " and")
         : sentence.replace(/,(?=[^,]*$)/, " and");
 
@@ -28,4 +28,3 @@ const filesizelimiter = (req, res, next) => {
   }
   next();
 };
-module.exports = filesizelimiter;
