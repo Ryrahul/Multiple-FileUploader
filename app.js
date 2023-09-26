@@ -1,16 +1,17 @@
-const express = require("express");
-const fileUpload = require("express-fileupload");
-const path = require("path");
-const fileExist = require("./middleware/fileExist");
-const filesizelimiter = require("./middleware/filesizelimiter");
-const fileExtlimiter = require("./middleware/fileExtLimiter");
+import express from "express";
+import fileUpload from "express-fileupload";
+import path from "path";
+import { fileExist } from "./middleware/fileExist.js";
+import { filesizelimiter } from "./middleware/filesizelimiter.js";
+import { fileExtlimiter } from "./middleware/fileExtLimiter.js";
 
-const port = process.env.PORT || 8080;
+const PORT = process.env.PORT ?? 8080;
 const app = express();
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
+
 app.post(
   "/upload",
   fileUpload({ createParentPath: true }),
@@ -35,6 +36,6 @@ app.post(
   }
 );
 
-app.listen(port, () => {
-  console.log(`listening on ${port}`);
+app.listen(PORT, () => {
+  console.log(`listening on ${PORT}`);
 });

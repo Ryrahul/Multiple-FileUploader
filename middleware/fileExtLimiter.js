@@ -1,6 +1,6 @@
-const path = require("path");
+import path from "path";
 
-const fileExtlimiter = (extArray) => {
+export const fileExtlimiter = (extArray) => {
   return (req, res, next) => {
     const files = req.files;
     const fileExt = [];
@@ -20,4 +20,3 @@ const fileExtlimiter = (extArray) => {
     next();
   };
 };
-module.exports = fileExtlimiter;
